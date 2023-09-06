@@ -128,8 +128,7 @@ const Navbar = () => {
               : ""
           } nav-link cursor-pointer`}
           onClick={() => {
-            /*     navigate("/dashboard/settings"); */
-            openSnackBar("showing snackbar", "error");
+            navigate("/dashboard/settings");
           }}
         >
           <SettingsLogo
@@ -143,8 +142,7 @@ const Navbar = () => {
         <div
           className="mb-10 bg-[#E8ECEE] cursor-pointer 4 w-[50px] h-[50px] flex justify-center items-center mx-auto rounded-full"
           onClick={() => {
-            /*   logout(); */
-            openSnackBar("showing snackbar", "neutral");
+            logout();
           }}
         >
           <LogoutLogo color={"#8E9091"} width={25} />
