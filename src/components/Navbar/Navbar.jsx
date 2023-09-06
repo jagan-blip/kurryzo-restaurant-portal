@@ -16,11 +16,14 @@ import {
   setStoreDetails,
 } from "../../redux/slices/authSlice";
 import PageLoading from "../PageLoading/PageLoading";
+import { useSnackbar } from "../SnackBar/useSnackBar";
+import SnackBar from "../SnackBar/SnackBar";
 const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const { isActive, message, openSnackBar, type } = useSnackbar();
   const dispatch = useDispatch();
   const onResize = (e) => {
     let height = window?.innerHeight;
@@ -59,6 +62,7 @@ const Navbar = () => {
   return (
     <>
       {loading && <PageLoading />}
+      <SnackBar isActive={isActive} message={message} type={type} />
       {/* desktop nav */}
       <div className=" bg-[#F5F9FA] hidden h-full fixed left-0 top-0 md:w-[15vw] md:flex flex-col ">
         <div className=" px-3 mt-8 mb-14">
@@ -124,7 +128,8 @@ const Navbar = () => {
               : ""
           } nav-link cursor-pointer`}
           onClick={() => {
-            navigate("/dashboard/settings");
+            /*     navigate("/dashboard/settings"); */
+            openSnackBar("showing snackbar", "error");
           }}
         >
           <SettingsLogo
@@ -138,7 +143,8 @@ const Navbar = () => {
         <div
           className="mb-10 bg-[#E8ECEE] cursor-pointer 4 w-[50px] h-[50px] flex justify-center items-center mx-auto rounded-full"
           onClick={() => {
-            logout();
+            /*   logout(); */
+            openSnackBar("showing snackbar", "neutral");
           }}
         >
           <LogoutLogo color={"#8E9091"} width={25} />
