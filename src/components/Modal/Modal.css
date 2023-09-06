@@ -1,0 +1,71 @@
+.modal-overlay {
+    background-color: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 1024;
+	overflow: hidden;
+  /*   transition: opacity 0.3s ease; */
+  
+}
+/* .modal-content {
+ 
+    transition: transform 0.3s ease;
+} */
+.modal-overlay-enter {
+/*     transition: opacity 0.3s ease; */
+   opacity: 0;
+    
+  
+}
+
+
+
+.modal-overlay-enter-done {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+.modal-overlay-enter .modal-content {
+    transform: translateY(-100px);
+ /*    transition: transform 0.3s ease; */
+}
+/* .modal-overlay-enter-active .modal-content {
+    transform: translateY(0);
+    transition: transform 0.3s ease;
+} */
+.modal-overlay-enter-done .modal-content {
+    transform: translateY(0);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay-exit {
+    /*     transition: opacity 0.3s ease; */
+       opacity: 1;
+        
+      
+    }
+    
+    
+    
+    .modal-overlay-exit-active {
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay-exit .modal-content {
+        transform: translateY(0);
+     /*    transition: transform 0.3s ease; */
+    }
+    /* .modal-overlay-enter-active .modal-content {
+        transform: translateY(0);
+        transition: transform 0.3s ease;
+    } */
+    .modal-overlay-exit-active .modal-content {
+        transform:  translateY(-100px);
+        transition: transform 0.3s ease;
+    }

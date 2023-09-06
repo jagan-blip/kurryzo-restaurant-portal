@@ -1,0 +1,45 @@
+.drawer-overlay {
+    background-color: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 1024;
+	overflow: hidden;
+    transition: opacity 0.3s ease;
+    opacity:0 ;
+}
+.drawer-content {
+ 
+    height: 100vh;
+  
+    position: fixed;
+    right: 0;
+    transition: transform 0.3s ease;
+    overflow: auto;
+    
+}
+
+.drawer-content{
+    transform: translateX(100%);
+}
+.drawer-overlay-enter-done  .drawer-content{
+    opacity: 1;
+ 
+   /*  background-color: red; */
+   
+}
+.drawer-overlay-enter-done {
+    opacity: 1;
+}
+.drawer-overlay-enter .drawer-content {
+    transform: translateX(100%);
+}
+.drawer-overlay-enter-done .drawer-content {
+    transform: translateX(0);
+}
+
