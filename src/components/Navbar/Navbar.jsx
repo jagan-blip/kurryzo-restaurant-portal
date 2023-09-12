@@ -150,7 +150,7 @@ const Navbar = () => {
       </div>
 
       {/* mobile nav */}
-      <div className="bg-[#F5F9FA] m-nav-shadow md:hidden fixed flex justify-between items-center p-3 top-0 w-full">
+      <div className="bg-[#F5F9FA] m-nav-shadow md:hidden fixed flex justify-between items-center p-3 top-0 w-full z-30">
         <div className="">
           <img src={logo} className="w-[40%]" />
         </div>
@@ -165,7 +165,7 @@ const Navbar = () => {
           <span className="block primary-gradient select-none w-[10vw] h-[3px]"></span>
         </div>
       </div>
-      <div className="bg-white p-3 flex justify-between content-center px-6 fixed bottom-0 w-full md:hidden">
+      <div className="bg-white p-3 flex justify-between content-center px-6 fixed bottom-0 w-full md:hidden z-30">
         <div
           className={`  ${
             location.pathname === "/dashboard/orders"

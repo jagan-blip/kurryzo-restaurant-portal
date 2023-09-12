@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './DropDown.css';
 import OutsideclickWrapper from '../OutsideClickWrapper';
 import * as Unicons from '@iconscout/react-unicons';
+
+
 const DropDown = ({ options, selected, onSelect, style, dropdown_style }) => {
   const [open, setOpen] = useState(false);
-
   return (
     <OutsideclickWrapper
       callback={() => {
