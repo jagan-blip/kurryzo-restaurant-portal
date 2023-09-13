@@ -10,6 +10,7 @@ import { setAuthenticated, setLoginData } from "../../redux/slices/authSlice";
 import CircularProgressBar from "../../components/CircularProgressBar/CircularProgressBar";
 import OTPInput from "react-otp-input";
 import OtpInput from "../../components/OtpInput/OtpInput";
+
 const VerifyOtp = () => {
   const email = useSelector((state) => state.auth.login_email);
   const password = useSelector((state) => state.auth.login_password);

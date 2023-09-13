@@ -1,4 +1,5 @@
 import axios from "axios";
+
 const getToken = async () => {
   try {
     const token = localStorage.getItem("token");
