@@ -98,7 +98,7 @@ const Login = () => {
               </div>
             </div>
             {error && <p className="mt-1 text-red-600  text-sm">{error}</p>}
-            <div className="text-center mt-auto  md:mt-6">
+            <div className="text-center mt-[30vh]  md:mt-6">
               <button
                 type="submit"
                 className="hover:opacity-80 select-none primary-gradient text-white uppercase font-medium px-5 py-1 w-full md:w-40 h-10 rounded-md"
