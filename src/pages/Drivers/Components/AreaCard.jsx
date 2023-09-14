@@ -1,6 +1,9 @@
 import React from "react";
 
 const AreaCard = ({ title, total, online, offline }) => {
+  const onlineWidth = (online / total) * 100
+  const offlineWidth = (offline / total) * 100
+  
   return (
     <div className="bg-[#F5F9FA] border border-dashed border-gray-500 md:rounded-2xl rounded-3xl">
       <p className="text-center  mt-2 md:text-2xl font-semibold  tracking-widest">
@@ -9,16 +12,16 @@ const AreaCard = ({ title, total, online, offline }) => {
       <div className="mt-3 flex px-3">
         <div className="bg-[#d8f8e7] flex justify-between py-2 px-2 items-center  w-[100%] rounded-lg font-semibold  ">
           <p className="text-lg">TOTAL</p>
-          <p className="w-20 md:w-20 py-1 md:py-2  text-center text-lg  rounded-md font-medium bg-[#00A859] text-white ">
+          <p className="w-20 md:w-20 py-1 md:py-2 text-center text-lg rounded-md font-medium bg-[#00A859] text-white ">
             {total}
           </p>
         </div>
       </div>
       <div className="flex px-3 mt-6 gap-1 md:gap-4  ">
-        <div className="   w-[90%] bg-[#ccddff] rounded md:rounded-md">
+        <div className="w-[90%] bg-[#ccddff] rounded md:rounded-md">
           <div
-            className="h-[100%]  bg-gradient-to-r flex items-center rounded from-[#256DFA] to-[#98BBF9] md:rounded-md "
-            style={{ width: "75%" }}
+            className="h-[100%] bg-gradient-to-r flex items-center rounded from-[#256DFA] to-[#98BBF9] md:rounded-md "
+            style={{ width: `${onlineWidth}%` }}
           >
             <p className=" text-white font-medium px-3 md:py-1 text-xs md:text-base">
               ONLINE
@@ -32,7 +35,7 @@ const AreaCard = ({ title, total, online, offline }) => {
         <div className=" w-[90%]  bg-[#F3E2EA] rounded md:rounded-md">
           <div
             className="h-[100%] flex items-center bg-gradient-to-r from-[#FA255E] to-[#D89FBE] rounded md:rounded-md "
-            style={{ width: "35%" }}
+            style={{ width: `${offlineWidth}%` }}
           >
             <p className=" text-white font-medium px-3 md:py-1 text-xs md:text-base">
               OFFLINE

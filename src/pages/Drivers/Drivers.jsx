@@ -24,7 +24,6 @@ const Drivers = () => {
       }
       setLoading(false);
     };
-
     fetchData();
   }, []);
 
@@ -87,7 +86,7 @@ const Drivers = () => {
           </div>
 
           <div className="mt-6 grid grid-flow-row-dense  md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4  gap-4 pb-10 relative">
-            {cardData.map((data, index) => (
+            {responseData.map((item) => (
               <AreaCard
                 key={item._id[0]._id}
                 title={item._id[0].name}
