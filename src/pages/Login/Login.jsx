@@ -51,8 +51,8 @@ const Login = () => {
     <>
       {loading && <PageLoading />}
 
-      <div className="min-w-[100vw] min-h-[100vh] flex justify-center items-center bg-bg_secondary">
-        <div className="bg-white flex flex-col rounded-md login-shadow p-6 md:px-10  w-[100vw] h-[100vh] md:w-[80%] md:h-auto  md:max-w-[500px]">
+      <div className="min-w-[100vw] min-h-[100vh]   flex justify-center items-center bg-bg_secondary">
+        <div className="bg-white flex flex-col rounded-md login-shadow p-6 pb-12 md:pb-6 md:px-10  w-[100vw] h-[100vh] justify-between md:w-[80%] md:h-auto  md:max-w-[500px]">
           <img src={logo} className="mx-auto w-52" />
           <h1 className="mt-4 text-center text-xl md:text-3xl font-medium text-text_high_emp">
             Restaurant Portal
@@ -98,7 +98,7 @@ const Login = () => {
               </div>
             </div>
             {error && <p className="mt-1 text-red-600  text-sm">{error}</p>}
-            <div className="text-center mt-auto md:mt-6">
+            <div className="text-center mt-[30vh]  md:mt-6">
               <button
                 type="submit"
                 className="hover:opacity-80 select-none primary-gradient text-white uppercase font-medium px-5 py-1 w-full md:w-40 h-10 rounded-md"

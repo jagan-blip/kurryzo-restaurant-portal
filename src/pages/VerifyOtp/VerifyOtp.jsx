@@ -112,7 +112,7 @@ const VerifyOtp = () => {
 
   return (
     <div className="min-w-[100vw] min-h-[100vh] flex justify-center items-center bg-bg_secondary">
-      <div className="bg-white flex flex-col rounded-md login-shadow p-6 md:px-6  w-[100vw] h-[100vh] md:w-[80%] md:h-auto  md:max-w-[500px]">
+      <div className="bg-white flex flex-col rounded-md login-shadow p-6 pb-12 md:pb-6 md:px-6  w-[100vw] h-[100vh] md:w-[80%] md:h-auto  md:max-w-[500px]">
         <div className="mt-3 flex gap-2 items-center">
           <Unicons.UilArrowLeft
             size={30}
@@ -167,7 +167,7 @@ const VerifyOtp = () => {
             /> */}
           </div>
           {error && <p className="mt-1 text-red-600  text-sm">{error}</p>}
-          <div className="text-center mt-auto md:mt-6  mb-2">
+          <div className="text-center mt-[30vh] md:mt-6  mb-2">
             <button
               type="submit"
               className="hover:opacity-80 mx-auto flex justify-center items-center duration-200 select-none primary-gradient text-white uppercase font-medium px-5 py-1 w-full md:w-40 h-10 rounded-md"

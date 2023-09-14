@@ -13,6 +13,9 @@
   /*   transition: opacity 0.3s ease; */
   
 }
+.modal-content {
+    position: relative;
+}
 /* .modal-content {
  
     transition: transform 0.3s ease;
