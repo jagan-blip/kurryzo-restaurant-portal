@@ -212,14 +212,14 @@ const Areas = () => {
         {" "}
         <SnackBar isActive={isActive} message={message} type={type} />
         <div className="h-[calc(100vh-20px)] relative md:min-h-[100vh] pt-14 pb-10 md:pt-0 md:pb-0  w-[100%]">
-          <button className="flex gap-2 primary-gradient absolute right-4 top-24 md:top-4  px-3 py-2 rounded-md z-50">
+          <button className="flex gap-2 primary-gradient absolute right-4 top-[90px] md:top-4  px-3 py-2 rounded-md z-50">
             <img src={add} alt="" />
             <div>
               <p className="text-white font-medium">CREATE NEW AREA</p>
             </div>
           </button>
           {selectedPolygon && (
-            <div className="z-50 absolute bottom-16 right-4 md:bottom-10 md:right-10">
+            <div className="z-50 absolute bottom-[70px] right-4 md:bottom-10 md:right-10">
               <button className="flex shadow-lg w-[45px] h-[45px] items-center rounded-lg justify-center p-2  bg-gradient-to-r from-[#0B9088] to-[#2F6A6E] text-white">
                 <FontAwesomeIcon
                   icon={faBolt}
