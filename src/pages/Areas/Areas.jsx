@@ -18,6 +18,7 @@ import { faBolt, faClose, faPencil } from "@fortawesome/free-solid-svg-icons";
 import circle from "@turf/circle";
 import bboxPolygon from "@turf/bbox-polygon";
 import Modal from "../../components/Modal/Modal";
+
 const libraries = ["places", "drawing"];
 const Areas = () => {
   const { isLoaded, loadError } = useJsApiLoader({

@@ -5,9 +5,10 @@ import add from "../../assets/basil_add-solid.svg";
 import AreaCard from "./Components/AreaCard";
 import FilterDropDown from "./Components/FilterDropDown";
 import getApiClient from "../../axios/axios";
+import TableDriver from "./Components/TableDriver";
 
 const Drivers = () => {
-  const [responseData, setReponseData] = useState([]);
+  const [responseData, setResponseData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [enabled, setEnabled] = useState(false);
 
@@ -17,8 +18,8 @@ const Drivers = () => {
       try {
         const axios = await getApiClient();
         const response = await axios.get('/v1/driver/area');
-        console.log(response)
-        setReponseData(response.data.data);
+        console.log(response);
+        setResponseData(response.data.data);
       } catch (err) {
         console.log(err);
       }
@@ -85,26 +86,41 @@ const Drivers = () => {
             <FilterDropDown />
           </div>
 
-          <div className="mt-6 grid grid-flow-row-dense  md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4  gap-4 pb-10 relative">
-            {responseData.map((item) => (
-              <AreaCard
-                key={item._id[0]._id}
-                title={item._id[0].name}
-                total={item.total_drivers}
-                online={item.active_drivers}
-                offline={item.inactive_drivers}
-              />
-            ))}
-            <button
-              className="bg-gradient-to-r from-[#0B9088] to-[#2F6A6E] px-2 py-2 rounded-md md:hidden fixed"
-              style={{
-                bottom: "20vw",
-                right: "7vw",
-              }}
-            >
-              <img src={add} className="w-8" alt="" />
-            </button>
-          </div>
+          {enabled ? (
+            <div>
+              <TableDriver />
+              <button
+                className="bg-gradient-to-r from-[#0B9088] to-[#2F6A6E] px-2 py-2 rounded-md md:hidden fixed"
+                style={{
+                  bottom: "20vw",
+                  right: "7vw",
+                }}
+              >
+                <img src={add} className="w-8" alt="" />
+              </button>
+            </div>
+          ) : (
+            <div className="mt-6 grid grid-flow-row-dense  md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4  gap-4 pb-10 relative">
+              {responseData.map((item) => (
+                <AreaCard
+                  key={item._id[0]._id}
+                  title={item._id[0].name}
+                  total={item.total_drivers}
+                  online={item.active_drivers}
+                  offline={item.inactive_drivers}
+                />
+              ))}
+              <button
+                className="bg-gradient-to-r from-[#0B9088] to-[#2F6A6E] px-2 py-2 rounded-md md:hidden fixed"
+                style={{
+                  bottom: "20vw",
+                  right: "7vw",
+                }}
+              >
+                <img src={add} className="w-8" alt="" />
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </MainLayout>
