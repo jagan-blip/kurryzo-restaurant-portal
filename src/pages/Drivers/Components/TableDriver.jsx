@@ -1,35 +1,42 @@
 import React, { useEffect, useState } from 'react';
-import DP from '../../../assets/123.png';
+import Profile from '../../../assets/driver_DP.svg';
 import getApiClient from '../../../axios/axios';
-import rightPage from '../../../assets/rightPage.svg'
-import leftPage from '../../../assets/leftPage.svg'
-
+import rightPage from '../../../assets/rightPage.svg';
+import leftPage from '../../../assets/leftPage.svg';
 
 const TableDriver = () => {
   const [driverData, setDriverData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const pageSize = 10; 
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const axios = await getApiClient();
-        const response = await axios.post('/v1/driver/portal/all', {
-          page: currentPage, // Include current page in the request
-          size: 10, // You can adjust the page size as needed
-        });
+  const fetchData = async () => {
+    try {
+      const axios = await getApiClient();
+      const response = await axios.post('/v1/driver/portal/all', {
+        page: currentPage,
+        size: pageSize,
+      });
+      console.log(response);
+
+      if (response.data.success) {
         setDriverData(response.data.data.drivers);
-        setTotalPages(response.data.data.totalpages); // Set the total pages from the API response
+        setTotalPages(response.data.data.totalpages);
         setLoading(false);
-      } catch (err) {
-        console.error('API Error:', err);
+      } else {
+        console.error('API Error:', response.data.error);
         setLoading(false);
       }
-    };
-
+    } catch (err) {
+      console.error('API Error:', err);
+      setLoading(false);
+    }
+  };
+  
+  useEffect(() => {
     fetchData();
-  }, [currentPage]); // Fetch data when currentPage changes
+  }, [currentPage]);
 
   const handlePrevPage = () => {
     if (currentPage > 1) {
@@ -49,19 +56,19 @@ const TableDriver = () => {
         <div className="overflow-x-auto">
           <table className="min-w-full bg-[#F2F7F9] text-lg md:text-2xl">
             <tbody>
-              {driverData?.map((driver) => (
+              {driverData.map((driver) => (
                 <tr
                   key={driver._id}
                   className="border-b border-gray-400 border-dashed whitespace-nowrap"
                 >
                   <td className="py-3 px-4 text-center">
                     <img
-                      src={DP} //just kept the static image coz no image in backend
+                      src={Profile}
                       alt={driver.name}
                       className="w-5 md:w-14 min-w-[56px] rounded-full mx-auto"
                     />
                   </td>
-                  <td className="py-3 px-4 text-center font-bold">DE50007</td>
+                  <td className="py-3 px-4 text-center font-bold">DE55005</td>
                   <td className="py-3 px-4 text-center text-[#666A6D]">
                     {driver.name}
                   </td>
@@ -76,13 +83,11 @@ const TableDriver = () => {
                           : 'bg-[#F3E2EA] text-[#FA255E]'
                       } `}
                     >
-                      {driver.driver_status === 'open_for_delivery'
-                        ? 'Online'
-                        : 'Offline'}
+                      {driver.driver_status === 'open_for_delivery' ? 'Online' : 'Offline'}
                     </p>
                   </td>
                   <td className="py-3 px-4 text-center font-semibold text-[#FFA500]">
-                    4.5
+                    {driver.avg_rating}
                   </td>
                   <td className="py-3 px-4 text-center">
                     <button className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#FA255E] to-[#6E2F69] text-white">
@@ -96,7 +101,7 @@ const TableDriver = () => {
         </div>
       )}
 
-      {/* Pagination*/}
+      {/* Pagination */}
       <div className="flex justify-end mt-10 ">
         <span className="mx-2">
           Page {currentPage} of {totalPages}
@@ -104,17 +109,17 @@ const TableDriver = () => {
         <button
           onClick={handlePrevPage}
           disabled={currentPage === 1}
-          className={`px-3 py-1 rounded-md cursor-pointer ${
+          className={`px-2 py-1 rounded-md cursor-pointer ${
             currentPage === 1 ? '' : 'bg-gray-200 hover:bg-gray-300'
           } text-gray-600`}
         >
           <img src={leftPage} alt="" />
         </button>
-        
+
         <button
           onClick={handleNextPage}
           disabled={currentPage === totalPages}
-          className={`px-3 py-1 rounded-md cursor-pointer ${
+          className={`px-2 py-1 rounded-md cursor-pointer ${
             currentPage === totalPages
               ? '' : 'bg-gray-200 hover:bg-gray-300'
           } text-gray-600`}

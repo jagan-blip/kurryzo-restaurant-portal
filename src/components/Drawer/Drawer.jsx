@@ -2,8 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import './Drawer.css';
 import ReactDom from 'react-dom';
 import { CSSTransition } from 'react-transition-group';
+
 const Drawer = ({ show, setShow, children, disableBackClick, onBackClick }) => {
   const nodeRef = useRef(null);
+  
   useEffect(() => {
     if (show) {
       document?.body?.classList?.add('modal_open');

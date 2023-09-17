@@ -23,12 +23,7 @@
 .modal-overlay-enter {
 /*     transition: opacity 0.3s ease; */
    opacity: 0;
-    
-  
 }
-
-
-
 .modal-overlay-enter-done {
     opacity: 1;
     transition: opacity 0.3s ease;
@@ -49,11 +44,8 @@
 .modal-overlay-exit {
     /*     transition: opacity 0.3s ease; */
        opacity: 1;
-        
-      
+
     }
-    
-    
     
     .modal-overlay-exit-active {
         opacity: 0;

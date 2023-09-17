@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import './Modal.css';
 import ReactDom from 'react-dom';
 import { CSSTransition } from 'react-transition-group';
+
 const Modal = ({ show, setShow, children, disableBackClick, onBackClick }) => {
   const nodeRef = useRef(null);
   const [open, setopen] = useState(show);
