@@ -540,7 +540,7 @@ const Areas = () => {
               mapContainerStyle={{
                 width: "500px",
                 height: "50vh",
-                maxWidth: "100%",
+                maxWidth: "80vw",
                 maxHeight: "100%",
                 marginTop: 10,
               }}
