@@ -15,6 +15,7 @@ const getToken = async () => {
 
 const instance = axios.create({
   baseURL: "https://dev-api-restaurant.kzo.starfii.com/",
+  // baseURL: "http://localhost:8000/",
 
   headers: {
     Accept: "application/json",
