@@ -3,60 +3,32 @@ import MainLayout from "../../components/MainLayout/MainLayout";
 import search from "../../assets/lucide_search.svg";
 import add from "../../assets/basil_add-solid.svg";
 import cancel from "../../assets/cancel.svg";
+import maskman from "../../assets/maskman.svg";
+import map from "../../assets/map.svg";
 import AreaCard from "./Components/AreaCard";
 import FilterDropDown from "./Components/FilterDropDown";
 import getApiClient from "../../axios/axios";
 import TableDriver from "./Components/TableDriver";
 import Drawer from "../../components/Drawer/Drawer";
+import DropDown from "../../components/DropDown/DropDown";
+import Input from "../../components/Input/Input";
 
 const Drivers = () => {
   const [responseData, setResponseData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [enabled, setEnabled] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-
-  const [image, setImage] = useState(null);
+  const options = ['Anna nagar', 'Avadi', 'Ambattur'];
+  const [selectedOption, setSelectedOption] = useState(options[2]);
+  // const [image, setImage] = useState(null);
   const hiddenFileInput = useRef(null);
 
-  const handleImageChange = (event) => {
-    const file = event.target.files[0];
-    const imgname = event.target.files[0].name;
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      const img = new Image();
-      img.src = reader.result;
-      img.onload = () => {
-        const canvas = document.createElement("canvas");
-        const maxSize = Math.max(img.width, img.height);
-        canvas.width = maxSize;
-        canvas.height = maxSize;
-        const ctx = canvas.getContext("2d");
-        ctx.drawImage(
-          img,
-          (maxSize - img.width) / 2,
-          (maxSize - img.height) / 2
-        );
-        canvas.toBlob(
-          (blob) => {
-            const file = new File([blob], imgname, {
-              type: "image/png",
-              lastModified: Date.now(),
-            });
 
-            console.log(file);
-            setImage(file);
-          },
-          "image/jpeg",
-          0.8
-        );
-      };
-    };
+  const handleOptionSelect = (option) => {
+    setSelectedOption(option);
   };
 
-  const handleClick = (event) => {
-    hiddenFileInput.current.click();
-  };
+ 
 
   const fetchData = async () => {
     setLoading(true);
@@ -157,6 +129,7 @@ const Drivers = () => {
                   total={item.total_drivers}
                   online={item.active_drivers}
                   offline={item.inactive_drivers}
+                  
                 />
               ))}
               <button
@@ -165,6 +138,7 @@ const Drivers = () => {
                   bottom: "20vw",
                   right: "7vw",
                 }}
+                onClick={()=>{setIsDrawerOpen(true)}}
               >
                 <img src={add} className="w-8" alt="" />
               </button>
@@ -172,50 +146,89 @@ const Drivers = () => {
           )}
         </div>
       </div>
-      <Drawer
-        show={isDrawerOpen}
-        setShow={setIsDrawerOpen}
-        disableBackClick={false} 
-        onBackClick={() => setIsDrawerOpen(false)} 
-       >
-        <div className="bg-white h-screen w-screen md:h-[100vw] md:w-[35vw] overflow-auto">
-          <div className="flex justify-between px-5 h-16 items-center bg-[#E8ECEE]">
-            <h2 className="font-semibold text-2xl ">Create New Driver</h2>
-            <img src={cancel} alt="" className="w-8" onClick={()=>{setIsDrawerOpen(false)}}/>
-          </div>
+          <Drawer
+            show={isDrawerOpen}
+            setShow={setIsDrawerOpen}
+            disableBackClick={false} 
+            onBackClick={() => setIsDrawerOpen(false)} 
+          >
+            <div className="bg-white h-screen w-screen md:h-[150vw] md:w-[65vw] lg:w-[55vw] xl:w-[45vw] 2xl:w-[35vw] overflow-auto">
+              <div className="flex justify-between px-5 h-16 items-center bg-[#E8ECEE]">
+                <h2 className="font-semibold text-2xl ">Create New Driver</h2>
+                <img src={cancel} alt="" className="w-8" onClick={()=>{setIsDrawerOpen(false)}}/>
+              </div>
 
-          <div>
-            <div className="flex justify-center items-center">
-              <div className=" p-8 rounded-lg text-center">
-              
-                <div onClick={handleClick} className="cursor-pointer">
-                  {image ? (
-                    <img
-                      src={URL.createObjectURL(image)}
-                      alt="upload image"
-                      className="h-48 w-48 rounded-full mx-auto"
-                    />
-                  ) : (
-                    <img
-                      src="./photo.png"
-                      alt="upload image"
-                      className="h-48 w-48 rounded-full mx-auto"
-                    />
-                  )}
-                  <input
-                    id="image-upload-input"
-                    type="file"
-                    onChange={handleImageChange}
-                    ref={hiddenFileInput}
-                    className="hidden"
+              <div className="flex justify-between p-5">
+                <img src={maskman} className="min-w-[26px]" alt="" />
+                <div className="flex items-center gap-5">
+                  <img src={map} alt="" />
+                  <DropDown
+                    options={options}
+                    selected={selectedOption}
+                    onSelect={handleOptionSelect}
+                    style={{ }} // Example style
+                    dropdown_style={{  }} // Example dropdown_style
                   />
+               </div>
+              </div>
+              
+              <div className='px-5'>
+                <h1 className='text-2xl text-[#666A6D]'>Personel details</h1>
+                <div className='mt-5'>
+                  <p className='font-semibold mb-2'>NAME</p>
+                  <Input
+                  placeholder="Enter driver name" />
+                  <p className='font-semibold mt-3 mb-2'>MOBILE NUMBER</p>
+                  <Input
+                  placeholder="Enter mobile number" />
+                  
+                </div>
+              </div>
+              <div className='border border-dashed border-gray-400 mx-7 mt-4'></div>
+
+              <div className='mt-6 px-5'>
+                <h1 className='text-2xl text-[#666A6D]'>Personel details</h1>
+                <div className='mt-5'>
+                  <p className='font-semibold mb-2'>NAME</p>
+                  <Input
+                  placeholder="Enter account holder name" />
+                  <p className='font-semibold mt-3 mb-2'>ACCOUNT NUMBER</p>
+                  <Input
+                  placeholder="Enter account number" />
+                  <p className='font-semibold mt-3 mb-2'>IFSC CODE</p>
+                  <Input
+                  placeholder="Enter ifsc code" />
+                </div>
+              </div>
+              <div className='border border-dashed border-gray-400 mx-7 mt-4'></div>
+              <div className='mt-5 px-6'>
+                <p className='font-semibold'>AADAR</p>
+                <div className='bg-[#e0f0ff] flex justify-between items-center h-14 px-5 mt-2 rounded-md font-medium border border-dashed border-[#2492ff]'>
+                  <p className='text-[#2492ff]'>Add Aadar</p>
+                  <p className='text-[#2492ff] cursor-pointer'>Remove</p>
+                </div>
+              </div>
+              <div className='mt-5 px-6'>
+                <p className='font-semibold'>LICENSE</p>
+                <div className='bg-[#e0f0ff] flex justify-between items-center h-14 px-5 mt-2 rounded-md font-medium border border-dashed border-[#2492ff]'>
+                  <p className='text-[#2492ff]'>Add License</p>
+                  <p className='text-[#2492ff] cursor-pointer'>Remove</p>
+                </div>
+              </div>
+              <div className='mt-5 px-6'>
+                <p className='font-semibold'>PAN</p>
+                <div className='bg-[#e0f0ff] flex justify-between items-center h-14 px-5 mt-2 rounded-md font-medium border border-dashed border-[#2492ff]'>
+                  <p className='text-[#2492ff]'>Add Pan</p>
+                  <p className='text-[#2492ff] cursor-pointer'>Remove</p>
+                </div>
+              </div>
+              <div className="mt-2 md:mt-0 flex justify-center mb-10">
+                <div className="font-normal">
+                  <button className='bg-[#0066CC] px-4 py-1 mt-4 rounded-full text-xl text-white'>Submit</button>
                 </div>
               </div>
             </div>
-          </div>
-         
-        </div>
-      </Drawer>
+          </Drawer>
       
     </MainLayout>
   );

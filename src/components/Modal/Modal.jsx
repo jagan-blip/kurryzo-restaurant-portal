@@ -6,6 +6,7 @@ import { CSSTransition } from 'react-transition-group';
 const Modal = ({ show, setShow, children, disableBackClick, onBackClick }) => {
   const nodeRef = useRef(null);
   const [open, setopen] = useState(show);
+  
   useEffect(() => {
     if (show) {
       document?.body?.classList?.add('modal_open');

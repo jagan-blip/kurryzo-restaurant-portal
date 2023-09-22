@@ -1,8 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
+import Modal from "../../../components/Modal/Modal";
+import cancel from '../../../assets/cancel.svg'
+import MapInsideModal from "./MapInsideModal";
 
 const AreaCard = ({ title, total, online, offline }) => {
   const onlineWidth = (online / total) * 100
   const offlineWidth = (offline / total) * 100
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isMapModalOpen, setIsMapModalOpen] = useState(false);
+
+  const openMapModal = () => {
+    setIsMapModalOpen(true);
+  };
+
+  const closeMapModal = () => {
+    setIsMapModalOpen(false);
+  };
   
   return (
     <div className="bg-[#F5F9FA] border border-dashed border-gray-500 md:rounded-2xl rounded-3xl">
@@ -46,10 +59,23 @@ const AreaCard = ({ title, total, online, offline }) => {
       </div>
 
       <div className="text-center text-lg md:text-right px-3 mt-3 mb-3">
-        <p className="text-[#FF6B00] cursor-pointer font-medium">
+        <p className="text-[#FF6B00] cursor-pointer font-medium" onClick={() =>
+          {setIsModalOpen(true)}}>
           View Details
         </p>
       </div>
+          <Modal 
+          show={isModalOpen}
+          setShow={setIsModalOpen}
+          disableBackClick={false}
+          onBackClick={() => setIsModalOpen(false)}
+          >
+            <div className="bg-white h-[25vw] w-[40vw] rounded-3xl relative">
+                {/* <img src={cancel} alt="" className="w-8" onClick={()=>{setIsModalOpen(false)}}/> */}
+                <MapInsideModal isOpen={isMapModalOpen} onClose={closeMapModal} />
+            </div>
+            
+          </Modal> 
     </div>
   );
 };
