@@ -33,7 +33,7 @@ const AreaCard = ({ title, total, online, offline }) => {
       <div className="flex px-3 mt-6 gap-1 md:gap-4  ">
         <div className="w-[90%] bg-[#ccddff] rounded md:rounded-md">
           <div
-            className="h-[100%] flex items-center rounded bg-gradient-to-rfrom-[#256DFA] to-[#98BBF9] md:rounded-md "
+            className="h-[100%] flex items-center rounded bg-gradient-to-r from-[#256DFA] to-[#98BBF9] md:rounded-md "
             style={{ width: `${onlineWidth}%` }}
           >
             <p className=" text-white font-medium px-3 md:py-1 text-xs md:text-base">
