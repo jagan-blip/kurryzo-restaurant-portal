@@ -121,10 +121,44 @@ border: 1px solid rgba( 255, 255, 255, 0.18 );
   color: #CA8A04;
   border-color: #CA8A04;
 }
+/* ::-webkit-scrollbar {
+  width: 20px;
+}::-webkit-scrollbar-track {
+  background-color: inherit;
+}::-webkit-scrollbar-thumb {
+  background-color: #d6dee1;
+}::-webkit-scrollbar-thumb {
+  background-color: #d6dee1;
+  border-radius: 20px;
+}::-webkit-scrollbar-thumb {
+  background-color: #d6dee1;
+  border-radius: 20px;
+  border: 6px solid transparent;
+  background-clip: content-box;
+}::-webkit-scrollbar-thumb:hover {
+  background-color: #a8bbbf;
+} */
 .snackbar.neutral {
   background: #E0F2FE;
   color: #0284C7;
   border-color: #0284C7;
+}
+.stepper-gradient {
+  background: linear-gradient(180deg, #EF2560 0%, #9C226D 100%);
+
+}
+.stepper-bg {
+  background: #E4E4E4;
+
+}
+.checkmark
+{
+    transform: rotate(45deg);
+    height: 15px;
+    width: 10px;
+    
+    border-bottom: 2px solid #fff;
+    border-right: 2px solid #fff;
 }
 @media (max-width:768px) {
   .snackbar {

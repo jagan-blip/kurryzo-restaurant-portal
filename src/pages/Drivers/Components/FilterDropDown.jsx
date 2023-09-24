@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from "react";
 import filter from "../../../assets/ci_slider-02.svg";
 
-const FilterDropDown = () => {
+const FilterDropDown = ({ data, setZoneId }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const [selected, setSelected] = useState("All");
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -17,13 +18,13 @@ const FilterDropDown = () => {
 
   useEffect(() => {
     if (isOpen) {
-      document.addEventListener('mousedown', closeDropdown);
+      document.addEventListener("mousedown", closeDropdown);
     } else {
-      document.removeEventListener('mousedown', closeDropdown);
+      document.removeEventListener("mousedown", closeDropdown);
     }
 
     return () => {
-      document.removeEventListener('mousedown', closeDropdown);
+      document.removeEventListener("mousedown", closeDropdown);
     };
   }, [isOpen]);
 
@@ -36,9 +37,21 @@ const FilterDropDown = () => {
         id="dropdownDefaultButton"
         data-dropdown-toggle="dropdown"
       >
-        <span><img src={filter} className=' mr-2 md:mr-5 bg-white px-1 py-1 rounded-md' alt="" /></span>All
+        <span>
+          <img
+            src={filter}
+            className=" mr-2 md:mr-5 bg-white px-1 py-1 rounded-md"
+            alt=""
+          />
+        </span>
+        <p className="w-[100px] overflow-hidden text-ellipsis whitespace-nowrap">
+          {selected}{" "}
+        </p>
+
         <svg
-          className={`w-2 h-2 md:w-3 md:h-3 ml-3 md:ml-12 ${isOpen ? 'transform rotate-180' : ''}`}
+          className={`w-2 h-2 md:w-3 md:h-3 ml-3 md:ml-12 ${
+            isOpen ? "transform rotate-180" : ""
+          }`}
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 10 6"
         >
@@ -61,42 +74,31 @@ const FilterDropDown = () => {
             aria-labelledby="dropdownDefaultButton"
           >
             <li>
-              <a
-                href="#"
-                className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+              <p
+                className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer select-none"
+                onClick={() => {
+                  setZoneId(null);
+                  setSelected("All");
+                  toggleDropdown();
+                }}
               >
-                Anna Nagar
-              </a>
-              <a
-                href="#"
-                className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-              >
-                T Nagar
-              </a>
-              <a
-                href="#"
-                className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-              >
-                Ambattur
-              </a>
-              <a
-                href="#"
-                className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-              >
-                Thirumullaivoyal
-              </a>
-              <a
-                href="#"
-                className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-              >
-                Avadi
-              </a>
-              <a
-                href="#"
-                className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-              >
-                OMR
-              </a>
+                All
+              </p>
+              {data?.map((item, index) => {
+                return (
+                  <p
+                    key={index}
+                    className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer select-none"
+                    onClick={() => {
+                      setZoneId(item?._id);
+                      setSelected(item?.name);
+                      toggleDropdown();
+                    }}
+                  >
+                    {item?.name}
+                  </p>
+                );
+              })}
             </li>
             {/* Add more dropdown options as needed */}
           </ul>
