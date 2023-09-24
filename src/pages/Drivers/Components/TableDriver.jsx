@@ -10,6 +10,9 @@ import map from '../../../assets/map.svg'
 import phone from '../../../assets/phone.svg'
 import DropDown from '../../../components/DropDown/DropDown';
 import Modal from '../../../components/Modal/Modal';
+import maskMan from "../../../assets/maskman.svg"
+import star from '../../../assets/star.svg'
+
 
 const TableDriver = () => {
   const [driverData, setDriverData] = useState([]);
@@ -64,6 +67,12 @@ const TableDriver = () => {
     }
   };
 
+  const [isOrderBased, setIsOrderBased] = useState(true);
+
+  const handleClick = () => {
+    setIsOrderBased((prevState) => !prevState);
+  };
+
   return (
     <div className="container mx-auto mt-10">
       {!loading && (
@@ -76,20 +85,23 @@ const TableDriver = () => {
                   className="border-b border-gray-400 border-dashed whitespace-nowrap"
                 >
                   <td className="py-3 px-4 text-center">
-                    <img
-                      src={Profile}
-                      alt={driver.name}
-                      className="w-5 md:w-14 min-w-[56px] rounded-full mx-auto"
-                    />
+                  <img
+                    src={driver.profile_image || maskMan}
+                    alt={driver.name}
+                    className="w-5 md:w-14 min-w-[56px] rounded-full mx-auto"
+                    onError={(e) => {
+                      e.target.src = maskMan;
+                    }}
+                  />
                   </td>
-                  <td className="py-3 px-4 text-center font-bold">DE55005</td>
+                  <td className="py-3 px-4 text-center font-bold">{driver._id}</td>
                   <td className="py-3 px-4 text-center text-[#666A6D]">
                     {driver.name}
                   </td>
                   <td className="py-3 px-4 text-center text-[#666A6D]">
                     +91-{driver.mobile}
                   </td>
-                  <td className="py-3 px-4 text-center">
+                  <td className= "text-center font-normal">
                     <p
                       className={`py-2 rounded-xl ${
                         driver.driver_status === 'open_for_delivery'
@@ -97,10 +109,10 @@ const TableDriver = () => {
                           : 'bg-[#F3E2EA] text-[#FA255E]'
                       } `}
                     >
-                      {driver.driver_status === 'open_for_delivery' ? 'Online' : 'Offline'}
+                      {driver.driver_status === 'open_for_delivery' ? 'ONLINE' : 'OFFLINE'}
                     </p>
                   </td>
-                  <td className="py-3 px-4 text-center font-semibold text-[#FFA500]">
+                  <td className="py-3 px-4 flec text-center font-semibold text-[#FFA500] ">
                     {driver.avg_rating}
                   </td>
                   <td className="py-3 px-4 text-center">
@@ -127,15 +139,28 @@ const TableDriver = () => {
                               <img src={Profile} alt="" />
                             </div>
                             <div className="">
-                              <p className="text-xl md:text-2xl font-semibold ">DE500071</p>
-                              <p className=" text-[#666A6D] text-lg font-medium">Test Driver 7</p>
-                              <p className='flex items-center gap-2 text-[#FA255E]'>Order Based <span className=''><img src={group} alt="" /></span></p>
+                              <p className="text-xl md:text-2xl font-semibold">{13515658}</p>
+                              <p className="text-[#666A6D] text-lg font-medium">Test Driver 7</p>
+                              <p
+                                className="flex items-center gap-2 text-[#FA255E] cursor-pointer"
+                                onClick={handleClick}
+                              >
+                                {isOrderBased ? "Order Based" : "Salary Based"}{" "}
+                                <span className="">
+                                  <img
+                                    src={group}
+                                    alt=""
+                                    onClick={handleClick}
+                                    style={{ cursor: "pointer" }}
+                                  />
+                                </span>
+                              </p>
                             </div>
                           </div>
 
                           <div className="mt-2 md:mt-0">
                             <div className=" text-gray-500 font-medium">
-                              <button className='bg-[#ccf5e7] text-[#00A859] px-10 py-3 mt-4 rounded-md text-xl'>Online</button>
+                              <button className='bg-[#ccf5e7] text-[#00A859] px-10 py-3 mt-4 rounded-md text-xl'>ONLINE</button>
                             </div>
                           </div>
                         </div>
@@ -193,7 +218,7 @@ const TableDriver = () => {
 
                         <div className='border border-dashed border-gray-400 mx-7 mt-4'></div>
 
-                        <div className='mt-5 px-6'>
+                        {/* <div className='mt-5 px-6'>
                           <h1 className='text-2xl text-[#666A6D]'>Bank account details</h1>
                           <div className='mt-5'>
                             <p className='font-semibold'>NAME</p>
@@ -209,9 +234,9 @@ const TableDriver = () => {
                                 <p>IN0000899783D</p>
                               </div>
                           </div>
-                       </div>
+                       </div> */}
 
-                      <div className='border border-dashed border-gray-400 mx-7 mt-6'></div>   
+                      {/* <div className='border border-dashed border-gray-400 mx-7 mt-6'></div>    */}
 
                       <div className='mt-5 px-6'>
                         <p className='font-semibold'>AADAR</p>

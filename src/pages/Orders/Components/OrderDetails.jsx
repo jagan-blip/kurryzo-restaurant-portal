@@ -11,9 +11,6 @@ import Modal from "../../../components/Modal/Modal";
 import Profile from '../../../assets/driver_DP.svg'
 import star from '../../../assets/star.svg'
 import { Stepper } from 'react-form-stepper';
-import getApiClient from "../../../axios/axios";
-
-// import Stepper from "./Stepper";
 
 const OrderDetails = (props) => {
   const {etaTime, imageSrc, orderID, price, date, time, driverStatus, restaurantName, restaurantLocation} = props;
