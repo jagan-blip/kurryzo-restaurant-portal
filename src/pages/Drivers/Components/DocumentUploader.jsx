@@ -29,7 +29,9 @@ function DocumentUploader({ documentType }) {
       </div>
       <div className="bg-[#e0f0ff] flex justify-between items-center h-14 px-5 mt-2 rounded-md font-medium border border-dashed border-[#2492ff]">
         <label className={labelClass}>
-          {selectedImage ? 'Image uploaded Successfully' : `Add ${documentType} Photo`}
+          {selectedImage
+            ? "Image uploaded Successfully"
+            : `Add ${documentType} Photo`}
           <input
             type="file"
             accept="image/*"
@@ -38,7 +40,10 @@ function DocumentUploader({ documentType }) {
           />
         </label>
         {selectedImage && (
-          <p className="text-[#2492ff] cursor-pointer" onClick={handleImageRemove}>
+          <p
+            className="text-[#2492ff] cursor-pointer"
+            onClick={handleImageRemove}
+          >
             Remove
           </p>
         )}

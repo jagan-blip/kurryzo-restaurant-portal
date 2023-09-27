@@ -17,19 +17,15 @@ import Stepper from "./Stepper";
 import SnackBar from "../../../components/SnackBar/SnackBar";
 import { useSnackbar } from "../../../components/SnackBar/useSnackBar";
 import PageLoading from "../../../components/PageLoading/PageLoading";
-const OrderDetails = ({ data, refetch }) => {
-import Profile from '../../../assets/driver_DP.svg'
-import star from '../../../assets/star.svg'
-import { Stepper } from 'react-form-stepper';
 
-const OrderDetails = (props) => {
-  const {etaTime, imageSrc, orderID, price, date, time, driverStatus, restaurantName, restaurantLocation} = props;
+const OrderDetails = ({ data, refetch }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDriverModalOpen, setIsDriverModalOpen] = useState(false);
   const driversList = [{ name: "Test Driver 1", rating: 4.2 }];
   const [drivers, setDrivers] = useState([]);
   const { isActive, message, openSnackBar, type } = useSnackbar();
   const [loading, setLoading] = useState(false);
+  
   const CancelOrder = async () => {
     setLoading(true);
     try {
@@ -237,8 +233,8 @@ const OrderDetails = (props) => {
             disableBackClick={false}
             onBackClick={() => setIsModalOpen(false)}
           >
-            <div className="bg-white w-[95vw]  md:w-[60vw]   max-h-[80vh] lg:w-[45vw]  xl:w-[40vw]  2xl:w-[35vw]  rounded-3xl">
-              <div className="flex justify-between  px-5 py-2 md:p-4 bg-[#E8ECEE] rounded-t-3xl">
+            <div className="bg-white w-[95vw]  md:w-[60vw] max-h-[80vh] lg:w-[45vw]  xl:w-[40vw]  2xl:w-[35vw]  rounded-3xl">
+              <div className="flex justify-between px-5 py-2 md:p-4 bg-[#E8ECEE] rounded-t-3xl">
                 <p className=" md:text-2xl md:px-3 font-medium">
                   Order Details
                 </p>

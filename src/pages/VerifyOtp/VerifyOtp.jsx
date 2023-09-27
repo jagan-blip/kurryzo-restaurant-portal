@@ -23,6 +23,7 @@ const VerifyOtp = () => {
   const [error, setError] = useState();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  
   const login = async () => {
     try {
       const axios = await getApiClient();
