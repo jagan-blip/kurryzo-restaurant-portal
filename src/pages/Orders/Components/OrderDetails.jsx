@@ -25,7 +25,7 @@ const OrderDetails = ({ data, refetch }) => {
   const [drivers, setDrivers] = useState([]);
   const { isActive, message, openSnackBar, type } = useSnackbar();
   const [loading, setLoading] = useState(false);
-  
+
   const CancelOrder = async () => {
     setLoading(true);
     try {
@@ -133,7 +133,7 @@ const OrderDetails = ({ data, refetch }) => {
 
             <div className="text-gray-500 font-medium">
               <p className="text-sm">Order ID</p>
-              <p className="text-black">{data?.order_id}</p>
+              <p className="text-black">{data?.kurryzo_order_id}</p>
             </div>
           </div>
 
@@ -307,7 +307,7 @@ const OrderDetails = ({ data, refetch }) => {
                         <p className="text-sm md:text-base ">Order ID</p>
                       </div>
                       <p className="font-semibold text-[#8E9091] text-sm md:text-base">
-                        {data?.order_id}
+                        {data?.kurryzo_order_id}
                       </p>
                     </div>
 

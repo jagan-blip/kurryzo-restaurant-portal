@@ -51,7 +51,6 @@ function App() {
           }
         } catch (error) {
           setLoading(false);
-          alert(error ?? "something went wrong");
         }
       };
       getStoreDetails();
