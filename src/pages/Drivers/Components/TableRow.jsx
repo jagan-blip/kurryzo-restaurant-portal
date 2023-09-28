@@ -388,10 +388,10 @@ const TableRow = ({ driver, zones, refetch, openSnackBar }) => {
                       )}
                     </div>
 
-                    <div className="border h-[30vh] py-2">
+                    <div className="border h-[30vh] rounded-b-3xl">
                       <img
                         src={driver?.aadhar_proof}
-                        className="w-full h-full "
+                        className="w-full h-full rounded-3xl "
                         alt=""
                       />
                     </div>
