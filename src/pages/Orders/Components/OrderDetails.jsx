@@ -374,7 +374,8 @@ const OrderDetails = ({ data, refetch }) => {
                         </p>
                       )}
                     {data?.driver_status === "unassigned" &&
-                      !data?.is_order_cancelled && (
+                      !data?.is_order_cancelled &&
+                      !data?.is_assigning && (
                         <p
                           className="bg-[#D1EDE3] text-[#00A859] px-2 md:px-4 py-2 rounded-md text-sm md:text-lg font-semibold cursor-pointer"
                           onClick={async () => {
@@ -455,6 +456,12 @@ const OrderDetails = ({ data, refetch }) => {
               </div>
             </div>
           </Modal>
+        </div>
+        <div>
+          <p className="text-center text-green-500">
+            {" "}
+            {data?.is_assigning ? "Assigning..." : ""}
+          </p>
         </div>
       </div>{" "}
     </>
