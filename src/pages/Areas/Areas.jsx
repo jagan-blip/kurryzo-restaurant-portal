@@ -558,7 +558,7 @@ const Areas = () => {
                 streetViewControl: false,
               }}
             >
-              {/* Child components, such as markers, info windows, etc. */}
+              {/* Child compo nents, such as markers, info windows, etc. */}
               <DrawingManager
                 onLoad={onLoadNewDrawingManager}
                 onOverlayComplete={onNewOverlayComplete}
