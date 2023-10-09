@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import MainLayout from "../../components/MainLayout/MainLayout";
 import search from "../../assets/lucide_search.svg";
 import add from "../../assets/basil_add-solid.svg";
@@ -23,6 +23,7 @@ import * as Unicons from "@iconscout/react-unicons";
 import OtpInput from "../../components/OtpInput/OtpInput";
 import moment from "moment";
 import PageLoading from "../../components/PageLoading/PageLoading";
+import { SocketContext } from "../../socket/SocketContext";
 
 const Drivers = () => {
   const [responseData, setResponseData] = useState([]);
@@ -65,6 +66,7 @@ const Drivers = () => {
   const [error, setError] = useState();
   const [otpError, setOtpError] = useState();
   const [otpToken, setOtpToken] = useState();
+  const socket = useContext(SocketContext);
   /* ========== profile image ========== */
   const [profileImage, setProfileImage] = useState(maskMan);
 
@@ -442,7 +444,12 @@ const Drivers = () => {
     }
     return () => clearInterval(interval);
   }, [counter]); */
-
+  useEffect(() => {
+    socket?.on("driver_change", async () => {
+      await fetchData();
+      await fetchDataTable();
+    });
+  }, [socket]);
   return (
     <>
       {(loading || newLoading) && <PageLoading />}
@@ -527,7 +534,7 @@ const Drivers = () => {
               >
                 <button className="flex items-center px-2 gap-1">
                   <span>
-                    <img src={add} alt="" />
+                    <img src={add} alt="" className="w-6" />
                   </span>
                   CREATE NEW DRIVER
                 </button>
