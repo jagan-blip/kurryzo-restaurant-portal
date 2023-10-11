@@ -105,8 +105,9 @@ const XPolygon = ({
       });
       if (response?.data?.success === true) {
         openSnackBar("updated zone !", "success");
-        setEdit(false);
+
         await getAllZones();
+        setEdit(false);
       } else {
         openSnackBar(
           response?.data?.error?.message || "something went wrong",
