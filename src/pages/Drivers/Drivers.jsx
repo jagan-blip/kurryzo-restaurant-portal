@@ -246,6 +246,7 @@ const Drivers = () => {
         zone: selectedOption,
         vehicle_no: "asd",
         vehicle_proof: "asd",
+        is_salaried: formValues.is_salaried,
       };
       setNewLoading(true);
       try {
@@ -433,6 +434,13 @@ const Drivers = () => {
     setSelectedPanImage(null);
     setSelectedVehicleImage(null);
   }, [isDrawerOpen]);
+  useEffect(() => {
+    if (isModalOpen === false) {
+      setOtp("");
+      setOtpError({});
+      setOtpToken("");
+    }
+  }, [isModalOpen]);
   /*  useEffect(() => {
     let interval;
 
