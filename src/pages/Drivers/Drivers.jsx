@@ -552,7 +552,8 @@ const Drivers = () => {
                   setCurrentPage={setCurrentPage}
                   totalPages={totalPages}
                   pageSize={pageSize}
-                  fetchData={fetchDataTable}
+                  fetchData={fetchData}
+                  fetchDataTable={fetchDataTable}
                   query={query}
                   zones={zones}
                   openSnackBar={openSnackBar}

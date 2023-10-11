@@ -23,6 +23,7 @@ const TableDriver = ({
   totalPages,
   pageSize,
   fetchData,
+  fetchDataTable,
   query,
   zones,
   openSnackBar,
@@ -38,7 +39,10 @@ const TableDriver = ({
   useEffect(() => {
     fetchData();
   }, [currentPage, zoneId]);
-
+  const refetch = async () => {
+    await fetchData();
+    await fetchDataTable();
+  };
   const handlePrevPage = () => {
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
@@ -64,7 +68,7 @@ const TableDriver = ({
                     <TableRow
                       driver={driver}
                       zones={zones}
-                      refetch={fetchData}
+                      refetch={refetch}
                       openSnackBar={openSnackBar}
                     />
                   );
