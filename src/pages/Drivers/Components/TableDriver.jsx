@@ -63,7 +63,6 @@ const TableDriver = ({
             <table className="min-w-full bg-[#F2F7F9] text-lg md:text-2xl">
               <tbody>
                 {driverData.map((driver, index) => {
-                  console.log(driver);
                   return (
                     <TableRow
                       driver={driver}
@@ -82,7 +81,7 @@ const TableDriver = ({
       )}
 
       {/* Pagination */}
-      {console.log(driverData?.length > 0 && query === "")}
+
       {driverData?.length > 0 && query === "" && (
         <div className="flex justify-end mt-10 pb-10 ">
           <span className="mx-2">

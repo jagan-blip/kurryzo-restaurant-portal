@@ -398,6 +398,7 @@ const Drivers = () => {
 
   useEffect(() => {
     fetchData();
+    fetchDataTable();
   }, [zoneId]);
 
   useEffect(() => {
@@ -437,7 +438,7 @@ const Drivers = () => {
   useEffect(() => {
     if (isModalOpen === false) {
       setOtp("");
-      setOtpError({});
+      setOtpError();
       setOtpToken("");
     }
   }, [isModalOpen]);
