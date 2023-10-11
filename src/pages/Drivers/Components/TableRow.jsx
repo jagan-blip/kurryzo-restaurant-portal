@@ -82,7 +82,7 @@ const TableRow = ({ driver, zones, refetch, openSnackBar }) => {
       const axios = await getApiClient();
       const response = await axios.put("/v1/driver/update", {
         driver_id: driver?._id,
-        zone: zoneId,
+        zone: selectedOption,
         is_salaried: !isOrderBased,
         aadhar: aadharValue,
         license: licenseValue,
