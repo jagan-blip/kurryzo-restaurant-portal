@@ -37,7 +37,7 @@ const TableDriver = ({
   };
 
   useEffect(() => {
-    fetchData();
+    fetchDataTable();
   }, [currentPage, zoneId]);
   const refetch = async () => {
     await fetchData();

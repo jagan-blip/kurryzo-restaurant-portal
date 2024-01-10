@@ -71,16 +71,20 @@ const Drivers = () => {
   const [profileImage, setProfileImage] = useState(maskMan);
 
   const handleProfileImage = async (e) => {
-    const response = await FileUpload(e);
-    setProfileImage(response?.location);
-    setFormValues({
-      ...formValues,
-      profileImage: response?.location,
-    });
-    if (validationErrors.profileImage) {
-      const updatedErrors = { ...validationErrors };
-      delete updatedErrors.profileImage;
-      setValidationErrors(updatedErrors);
+    try {
+      const response = await FileUpload(e);
+      setProfileImage(response?.location);
+      setFormValues({
+        ...formValues,
+        profileImage: response?.location,
+      });
+      if (validationErrors.profileImage) {
+        const updatedErrors = { ...validationErrors };
+        delete updatedErrors.profileImage;
+        setValidationErrors(updatedErrors);
+      }
+    } catch (err) {
+      alert(err?.response?.data?.error?.message || "something went wrong");
     }
   };
 

@@ -147,6 +147,9 @@ const OrderDetails = ({ data, refetch }) => {
           </div>
         </div>
         <div className="flex flex-row justify-between px-3 mt-5 mb-8">
+          <p>{data?.branch?.name}</p>
+        </div>
+        <div className="flex flex-row justify-between px-3 mt-5 mb-8">
           <div>
             <p className="font-medium text-gray-500 tracking-wider text-sm">
               {moment(new Date(data?.created_at)).format("DD MMM YYYY")}

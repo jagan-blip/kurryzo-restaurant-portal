@@ -10,7 +10,7 @@ const SocketProvider = ({ children }) => {
   const dispatch = useDispatch();
   const connect = (token, dispatch) => {
     const socket = io(
-      `https://dev-api-restaurant.kzo.starfii.com/restaurant?token=${token}`,
+      `https://dev-restaurant-portal.kzo.starfii.com/restaurant?token=${token}`,
       {
         autoConnect: false,
         forceNew: true,
