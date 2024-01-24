@@ -419,7 +419,7 @@ const Drivers = () => {
       console.log(err);
     }
   };
-  const fetchDataTableSocket = async () => {
+  const fetchDataTableSocket = async (page) => {
     try {
       const axios = await getApiClient();
       const response = await axios.post("/v1/driver/portal/all", {
@@ -498,13 +498,13 @@ const Drivers = () => {
   useEffect(() => {
     socket?.on("driver_change", async () => {
       await fetchDataSocket();
-      await fetchDataTableSocket();
+      await fetchDataTableSocket(currentPage);
     });
 
     return () => {
       socket?.off("driver_change");
     };
-  }, [socket, zoneId, currentPage]);
+  }, [socket, currentPage]);
   return (
     <>
       {(loading || newLoading) && <PageLoading />}

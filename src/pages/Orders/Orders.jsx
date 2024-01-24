@@ -26,7 +26,6 @@ const Orders = () => {
   const pageSize = 10;
   const { isActive, message, openSnackBar, type } = useSnackbar();
 
-
   const driverPortal = async () => {
     setLoading(true);
     try {
@@ -116,7 +115,10 @@ const Orders = () => {
     socket?.on("order_change", async () => {
       await driverPortal();
     });
-  }, [socket]);
+    return () => {
+      socket?.off("order_change");
+    };
+  }, [socket, currentPage]);
 
   return (
     <>
