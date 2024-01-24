@@ -1,8 +1,8 @@
-import axios from 'axios';
+import axios from "axios";
 
 export const LocalFileUpload = async (e, size, width, height) => {
   const formData = new FormData();
-  formData.append('file', e.target.files[0]);
+  formData.append("file", e.target.files[0]);
 
   return new Promise((resolve, reject) => {
     if (size) {
@@ -11,7 +11,7 @@ export const LocalFileUpload = async (e, size, width, height) => {
       const mb = (fileSize / 1024 ** 2).toFixed(2);
 
       if (mb > 2) {
-        reject('Image size should be under 5mb');
+        reject("Image size should be under 5mb");
       }
     }
     let url = URL.createObjectURL(e.target.files[0]);
@@ -31,7 +31,7 @@ export const LocalFileUpload = async (e, size, width, height) => {
         } */
       };
 
-      image.onerror = err => {
+      image.onerror = (err) => {
         reject(err);
       };
     }
@@ -39,7 +39,7 @@ export const LocalFileUpload = async (e, size, width, height) => {
 };
 export const LocalFileUpload2 = (e, size, width, height) => {
   const formData = new FormData();
-  formData.append('file', e.target.files[0]);
+  formData.append("file", e.target.files[0]);
 
   if (size) {
     const fileSize = e.target.files[0]?.size;
@@ -47,7 +47,7 @@ export const LocalFileUpload2 = (e, size, width, height) => {
     const mb = (fileSize / 1024 ** 2).toFixed(2);
 
     if (mb > 2) {
-      throw new Error('Image size should be under 5mb ');
+      throw new Error("Image size should be under 5mb ");
     }
   }
   let url = URL.createObjectURL(e.target.files[0]);
@@ -68,18 +68,18 @@ export const LocalFileUpload2 = (e, size, width, height) => {
       }
     };
 
-    image.onerror = err => {
+    image.onerror = (err) => {
       throw new Error(`image shold be ${width}w x ${height}h dimensions`);
     };
   }
 };
 export const FileUpload = async (e, size, width, height) => {
   const formData = new FormData();
-  formData.append('file', e.target.files[0]);
+  formData.append("file", e.target.files[0]);
 
   try {
     const response = await axios.post(
-      'https://api.jadzzo.com/v1/aws/upload',
+      "https://dev-restaurant-portal.kzo.starfii.com",
       formData
     );
     return Promise.resolve(response?.data);
@@ -90,11 +90,11 @@ export const FileUpload = async (e, size, width, height) => {
 
 export const FileUpload2 = async (file, size, width, height) => {
   const formData = new FormData();
-  formData.append('file', file);
+  formData.append("file", file);
 
   try {
     const response = await axios.post(
-      'https://api.jadzzo.com/v1/aws/upload',
+      "https://dev-restaurant-portal.kzo.starfii.com",
       formData
     );
     return Promise.resolve(response?.data);
