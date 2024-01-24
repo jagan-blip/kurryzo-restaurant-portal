@@ -176,9 +176,9 @@ const Drivers = () => {
     mobileNumber: Yup.string()
       .required("Mobile number is required")
       .matches(/^[0-9]{10}$/, "Mobile number is invalid"),
-    // accountHolderName: Yup.string().required("Account Holder Name is required"),
-    // accountNumber: Yup.string().required("Account number is required"),
-    // ifscCode: Yup.string().required("IFSC code is required"),
+    accountHolderName: Yup.string().required("Account Holder Name is required"),
+    accountNumber: Yup.string().required("Account number is required"),
+    ifscCode: Yup.string().required("IFSC code is required"),
     profileImage: Yup.string().required("Profile image is required"),
 
     aadharNumber: Yup.string()
@@ -218,6 +218,9 @@ const Drivers = () => {
     /*  vehicleNumber: "",
     vehicleImage: null, */
     is_salaried: null,
+    accountHolderName: "",
+    accountNumber: "",
+    ifscCode: "",
   });
 
   const handleOptionSelect = (option) => {
@@ -251,6 +254,11 @@ const Drivers = () => {
         vehicle_no: "asd",
         vehicle_proof: "asd",
         is_salaried: formValues.is_salaried,
+        bank_account_details: {
+          name: formValues.accountHolderName,
+          account_number: formValues.accountNumber,
+          ifsc_code: formValues.ifscCode,
+        },
       };
       setNewLoading(true);
       try {
@@ -399,7 +407,37 @@ const Drivers = () => {
     }
     setLoading(false);
   };
+  const fetchDataSocket = async () => {
+    try {
+      const axios = await getApiClient();
+      const response = await axios.post("/v1/driver/area", {
+        zone: zoneId,
+      });
 
+      setResponseData(response.data.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const fetchDataTableSocket = async () => {
+    try {
+      const axios = await getApiClient();
+      const response = await axios.post("/v1/driver/portal/all", {
+        page: currentPage,
+        size: pageSize,
+        zone: zoneId,
+      });
+
+      if (response.data.success) {
+        setDriverData(response.data.data.drivers);
+        setTotalPages(response.data.data.totalpages);
+      } else {
+        openSnackBar("something went wrong", "error");
+      }
+    } catch (err) {
+      openSnackBar("something went wrong", "error");
+    }
+  };
   useEffect(() => {
     fetchData();
     fetchDataTable();
@@ -459,10 +497,14 @@ const Drivers = () => {
   }, [counter]); */
   useEffect(() => {
     socket?.on("driver_change", async () => {
-      await fetchData();
-      await fetchDataTable();
+      await fetchDataSocket();
+      await fetchDataTableSocket();
     });
-  }, [socket]);
+
+    return () => {
+      socket?.off("driver_change");
+    };
+  }, [socket, zoneId, currentPage]);
   return (
     <>
       {(loading || newLoading) && <PageLoading />}
@@ -771,59 +813,69 @@ const Drivers = () => {
 
             <div className="border border-dashed border-gray-400 mx-7 mt-4"></div>
 
-            {/* <div className="mt-6 px-5">
-            <h1 className="text-2xl text-[#666A6D]">Bank Account details</h1>
-            <div className="mt-5">
-              <p className="font-semibold mb-2">ACCOUNT HOLDER NAME</p>
-              <Input
-                placeholder="Enter account holder name"
-                onChange={(e) => {
-                  if (validationErrors.accountHolderName) {
-                    const updatedErrors = { ...validationErrors };
-                    delete updatedErrors.accountHolderName;
-                    setValidationErrors(updatedErrors);
-                  }
-                  setFormValues({ ...formValues, accountHolderName: e.target.value });
-                }}
-              />
-              {validationErrors.accountHolderName && (
-                <p className="text-red-500">{validationErrors.accountHolderName}</p>
-              )}
-              <p className="font-semibold mt-3 mb-2">ACCOUNT NUMBER</p>
-              <Input
-                placeholder="Enter account number"
-                value={formValues.accountNumber}
-                onChange={(e) => {
-                  if (validationErrors.accountNumber) {
-                    const updatedErrors = { ...validationErrors };
-                    delete updatedErrors.accountNumber;
-                    setValidationErrors(updatedErrors);
-                  }
-                  setFormValues({ ...formValues, accountNumber: e.target.value });
-                }}
-              />
-              {validationErrors.accountNumber && (
-                <p className="text-red-500">{validationErrors.accountNumber}</p>
-              )}
-              <p className="font-semibold mt-3 mb-2">IFSC CODE</p>
-              <Input
-                placeholder="Enter ifsc code"
-                value={formValues.ifscCode}
-                onChange={(e) => {
-                  if (validationErrors.ifscCode) {
-                    const updatedErrors = { ...validationErrors };
-                    delete updatedErrors.ifscCode;
-                    setValidationErrors(updatedErrors);
-                  }
-                  setFormValues({ ...formValues, ifscCode: e.target.value });
-                }}
-              />
-              {validationErrors.ifscCode && (
-                <p className="text-red-500">{validationErrors.ifscCode}</p>
-              )}
+            <div className="mt-6 px-5">
+              <h1 className="text-2xl text-[#666A6D]">Bank Account details</h1>
+              <div className="mt-5">
+                <p className="font-semibold mb-2">ACCOUNT HOLDER NAME</p>
+                <Input
+                  placeholder="Enter account holder name"
+                  onChange={(e) => {
+                    if (validationErrors.accountHolderName) {
+                      const updatedErrors = { ...validationErrors };
+                      delete updatedErrors.accountHolderName;
+                      setValidationErrors(updatedErrors);
+                    }
+                    setFormValues({
+                      ...formValues,
+                      accountHolderName: e.target.value,
+                    });
+                  }}
+                />
+                {validationErrors.accountHolderName && (
+                  <p className="text-red-500">
+                    {validationErrors.accountHolderName}
+                  </p>
+                )}
+                <p className="font-semibold mt-3 mb-2">ACCOUNT NUMBER</p>
+                <Input
+                  placeholder="Enter account number"
+                  value={formValues.accountNumber}
+                  onChange={(e) => {
+                    if (validationErrors.accountNumber) {
+                      const updatedErrors = { ...validationErrors };
+                      delete updatedErrors.accountNumber;
+                      setValidationErrors(updatedErrors);
+                    }
+                    setFormValues({
+                      ...formValues,
+                      accountNumber: e.target.value,
+                    });
+                  }}
+                />
+                {validationErrors.accountNumber && (
+                  <p className="text-red-500">
+                    {validationErrors.accountNumber}
+                  </p>
+                )}
+                <p className="font-semibold mt-3 mb-2">IFSC CODE</p>
+                <Input
+                  placeholder="Enter ifsc code"
+                  value={formValues.ifscCode}
+                  onChange={(e) => {
+                    if (validationErrors.ifscCode) {
+                      const updatedErrors = { ...validationErrors };
+                      delete updatedErrors.ifscCode;
+                      setValidationErrors(updatedErrors);
+                    }
+                    setFormValues({ ...formValues, ifscCode: e.target.value });
+                  }}
+                />
+                {validationErrors.ifscCode && (
+                  <p className="text-red-500">{validationErrors.ifscCode}</p>
+                )}
+              </div>
             </div>
-          </div>
-          <div className="border border-dashed border-gray-400 mx-7 mt-4"></div> */}
+            <div className="border border-dashed border-gray-400 mx-7 mt-4"></div>
 
             <div className="mt-5 px-6">
               <p className="font-semibold">AADAR</p>

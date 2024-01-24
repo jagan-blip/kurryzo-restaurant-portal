@@ -129,7 +129,7 @@ const TableRow = ({ driver, zones, refetch, openSnackBar }) => {
         <td className="py-3 px-4 text-center font-bold">{driver?.driver_id}</td>
         <td className="py-3 px-4 text-center text-[#666A6D]">{driver?.name}</td>
         <td className="py-3 px-4 text-center text-[#666A6D]">
-          +91-{driver.mobile}
+          {driver.mobile}
         </td>
         <td className="text-center font-normal">
           <p
@@ -237,7 +237,7 @@ const TableRow = ({ driver, zones, refetch, openSnackBar }) => {
                   </div>
                   <div className="">
                     <p className="text-base md:text-xl font-semibold whitespace-nowrap">
-                      +91-{driver?.mobile}
+                      {driver?.mobile}
                     </p>
                   </div>
                 </div>
@@ -297,25 +297,27 @@ const TableRow = ({ driver, zones, refetch, openSnackBar }) => {
 
               <div className="border border-dashed border-gray-400 mx-7 mt-4"></div>
 
-              {/* <div className='mt-5 px-6'>
-                          <h1 className='text-2xl text-[#666A6D]'>Bank account details</h1>
-                          <div className='mt-5'>
-                            <p className='font-semibold'>NAME</p>
-                            <div className='flex bg-[#F6F6F6] h-12 rounded-md items-center px-3 mt-2'>
-                              <p>Test Driver 7</p>
-                            </div>
-                            <p className='font-semibold mt-3'>ACCOUNT NUMBER</p>
-                              <div className='flex bg-[#F6F6F6] h-12 rounded-md items-center px-3 mt-2'>
-                                <p>216354196165165</p>
-                              </div>
-                            <p className='font-semibold mt-2'>IFSC CODE</p>
-                              <div className='flex bg-[#F6F6F6] h-12 rounded-md items-center px-3 mt-2'>
-                                <p>IN0000899783D</p>
-                              </div>
-                          </div>
-                       </div> */}
+              <div className="mt-5 px-6">
+                <h1 className="text-2xl text-[#666A6D]">
+                  Bank account details
+                </h1>
+                <div className="mt-5">
+                  <p className="font-semibold">NAME</p>
+                  <div className="flex bg-[#F6F6F6] h-12 rounded-md items-center px-3 mt-2">
+                    <p>{driver?.bank_account_details?.name}</p>
+                  </div>
+                  <p className="font-semibold mt-3">ACCOUNT NUMBER</p>
+                  <div className="flex bg-[#F6F6F6] h-12 rounded-md items-center px-3 mt-2">
+                    <p>{driver?.bank_account_details?.account_number}</p>
+                  </div>
+                  <p className="font-semibold mt-2">IFSC CODE</p>
+                  <div className="flex bg-[#F6F6F6] h-12 rounded-md items-center px-3 mt-2">
+                    <p>{driver?.bank_account_details?.ifsc_code}</p>
+                  </div>
+                </div>
+              </div>
 
-              {/* <div className='border border-dashed border-gray-400 mx-7 mt-6'></div>    */}
+              <div className="border border-dashed border-gray-400 mx-7 mt-6"></div>
 
               <div className="mt-5 px-6">
                 <p className="font-semibold">AADAR</p>

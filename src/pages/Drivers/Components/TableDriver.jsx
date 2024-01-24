@@ -65,6 +65,7 @@ const TableDriver = ({
                 {driverData.map((driver, index) => {
                   return (
                     <TableRow
+                      key={driver?._id}
                       driver={driver}
                       zones={zones}
                       refetch={refetch}
