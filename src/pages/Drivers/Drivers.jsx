@@ -507,7 +507,7 @@ const Drivers = () => {
   }, [socket, currentPage]);
   return (
     <>
-      {(loading || newLoading) && <PageLoading />}
+      {(loading || tableLoading || newLoading) && <PageLoading />}
       <SnackBar isActive={isActive} message={message} type={type} />
       <MainLayout>
         <div className="min-h-[100vh]">
