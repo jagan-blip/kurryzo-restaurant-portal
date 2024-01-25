@@ -39,6 +39,7 @@ const Drivers = () => {
   const [driverData, setDriverData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [driverDataSearch, setDriverDataSearch] = useState([]);
   const pageSize = 10;
   const labelAadar = selectedAadarImage
     ? "text-green-600 cursor-pointer"
@@ -343,7 +344,7 @@ const Drivers = () => {
         zone: zoneId,
       });
       if (response?.data?.success === true) {
-        setDriverData(response?.data?.data?.drivers);
+        setDriverDataSearch(response?.data?.data?.drivers);
       } else {
         openSnackBar(response?.data?.error?.message ?? "something went wrong");
       }
@@ -599,20 +600,37 @@ const Drivers = () => {
 
             {enabled ? (
               <div>
-                <TableDriver
-                  driverData={driverData}
-                  zoneId={zoneId}
-                  loading={tableLoading}
-                  currentPage={currentPage}
-                  setCurrentPage={setCurrentPage}
-                  totalPages={totalPages}
-                  pageSize={pageSize}
-                  fetchData={fetchData}
-                  fetchDataTable={fetchDataTable}
-                  query={query}
-                  zones={zones}
-                  openSnackBar={openSnackBar}
-                />
+                {query !== "" ? (
+                  <TableDriver
+                    driverData={driverDataSearch}
+                    zoneId={zoneId}
+                    loading={tableLoading}
+                    currentPage={currentPage}
+                    setCurrentPage={setCurrentPage}
+                    totalPages={totalPages}
+                    pageSize={pageSize}
+                    fetchData={fetchData}
+                    fetchDataTable={fetchDataTable}
+                    query={query}
+                    zones={zones}
+                    openSnackBar={openSnackBar}
+                  />
+                ) : (
+                  <TableDriver
+                    driverData={driverData}
+                    zoneId={zoneId}
+                    loading={tableLoading}
+                    currentPage={currentPage}
+                    setCurrentPage={setCurrentPage}
+                    totalPages={totalPages}
+                    pageSize={pageSize}
+                    fetchData={fetchData}
+                    fetchDataTable={fetchDataTable}
+                    query={query}
+                    zones={zones}
+                    openSnackBar={openSnackBar}
+                  />
+                )}
                 <button
                   className="bg-gradient-to-r from-[#0B9088] to-[#2F6A6E] px-2 py-2 rounded-md md:hidden fixed"
                   style={{
