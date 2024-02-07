@@ -107,6 +107,32 @@ const TableRow = ({ driver, zones, refetch, openSnackBar }) => {
     setLoading(false);
   };
 
+  const Payout = async () => {
+    setLoading(true);
+    try {
+      const axios = await getApiClient();
+      const response = await axios.put("/v1/driver/payout", {
+        driver_id: driver?._id,
+      });
+      if (response?.data?.success === true) {
+        setIsDrawerOpen(false);
+        await refetch();
+        openSnackBar("payout successfull", "success");
+      } else {
+        openSnackBar(
+          response?.data?.error?.message || "something went wrong",
+          "error"
+        );
+      }
+    } catch (err) {
+      openSnackBar(
+        err?.response?.data?.error?.message || "something went wrong",
+        "error"
+      );
+    }
+    setLoading(false);
+  };
+
   return (
     <>
       {loading && <PageLoading />}
@@ -288,7 +314,12 @@ const TableRow = ({ driver, zones, refetch, openSnackBar }) => {
 
                 <div className="mt-2 md:mt-0">
                   <div className="font-normal">
-                    <button className="bg-[#0066CC] px-3 md:px-4 md:py-1 rounded-full md:text-xl text-white">
+                    <button
+                      onClick={() => {
+                        Payout();
+                      }}
+                      className="bg-[#0066CC] px-3 md:px-4 md:py-1 rounded-full md:text-xl text-white"
+                    >
                       PAYOUT
                     </button>
                   </div>
